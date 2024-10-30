@@ -13,6 +13,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ pages }) => {
           <button>{pages[key].title}</button>
         </Link>
       ))}
+      <Link to="/pages/admin" style={{ textDecoration: 'none', color: '#333' }}>
+        <button>Admin</button>
+      </Link>
     </div>
   );
 };

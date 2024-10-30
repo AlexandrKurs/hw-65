@@ -8,7 +8,7 @@ const PageLoader: React.FC = () => {
   const { pageName } = useParams<{ pageName: string }>();
   const { pages, loading, error } = useFetchPages();
 
-  if (loading) return <div>Загрузка...</div>;
+  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   const page = pages[pageName || ''];
@@ -18,7 +18,7 @@ const PageLoader: React.FC = () => {
       {page ? (
         <Page title={page.title} content={page.content} />
       ) : (
-        <div>Страница не найдена</div>
+        <div>Page not found</div>
       )}
     </div>
   );
