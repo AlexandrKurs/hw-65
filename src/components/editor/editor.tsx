@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { useFetchPages } from '../../hooks/useFetchPages.ts';
-
-const axiosApi = axios.create({
-  baseURL: "https://alexandrk-server-default-rtdb.europe-west1.firebasedatabase.app/",
-});
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFetchPages } from "../../hooks/useFetchPages";
+import axiosApi from "../../axiosApi";
 
 const Editor: React.FC = () => {
   const { pages, loading, error } = useFetchPages();
-  const [selectedPage, setSelectedPage] = useState<string>('');
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
+  const [selectedPage, setSelectedPage] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,36 +25,53 @@ const Editor: React.FC = () => {
       });
       navigate(`/pages/${selectedPage}`);
     } catch (err) {
-      console.error('Ошибка при сохранении данных', err);
+      console.error("Error saving data", err);
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="text-center">Loading...</div>;
+  if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
-    <div>
-      <h1>Edit pages</h1>
-      <select value={selectedPage} onChange={(e) => setSelectedPage(e.target.value)}>
-        <option value="">Select page</option>
-        {Object.keys(pages).map((key) => (
-          <option key={key} value={key}>
-            {pages[key].title}
-          </option>
-        ))}
-      </select>
+    <div className="container mt-4">
+      <h3 className="mb-4">Edit Pages</h3>
+      <div className="mb-3">
+        <select
+          value={selectedPage}
+          onChange={(e) => setSelectedPage(e.target.value)}
+          className="form-select"
+        >
+          <option value="">Select page</option>
+          {Object.keys(pages).map((key) => (
+            <option key={key} value={key}>
+              {pages[key].title}
+            </option>
+          ))}
+        </select>
+      </div>
 
       {selectedPage && (
-        <div>
-          <div>
-            <label>Title:</label>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <div className="mb-4">
+          <div className="mb-3">
+            <label className="form-label">Title:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="form-control"
+            />
           </div>
-          <div>
-            <label>Content:</label>
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} />
+          <div className="mb-3">
+            <label className="form-label">Content:</label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="form-control"
+            />
           </div>
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave} className="btn btn-primary">
+            Save
+          </button>
         </div>
       )}
     </div>

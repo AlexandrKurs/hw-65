@@ -1,8 +1,7 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useFetchPages } from '../../hooks/useFetchPages.ts';
-import Page from '../page/page.tsx';
-
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useFetchPages } from "../../hooks/useFetchPages.ts";
+import Page from "../page/page.tsx";
 
 const PageLoader: React.FC = () => {
   const { pageName } = useParams<{ pageName: string }>();
@@ -11,7 +10,7 @@ const PageLoader: React.FC = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  const page = pages[pageName || ''];
+  const page = pages[pageName || ""];
 
   return (
     <div>

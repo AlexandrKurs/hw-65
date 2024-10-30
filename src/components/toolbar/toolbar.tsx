@@ -1,5 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 interface ToolbarProps {
   pages: Record<string, { title: string }>;
@@ -7,14 +8,20 @@ interface ToolbarProps {
 
 const Toolbar: React.FC<ToolbarProps> = ({ pages }) => {
   return (
-    <div style={{ display: 'flex', gap: '10px', padding: '10px', backgroundColor: '#f1f1f1' }}>
+    <div className="d-flex gap-2 p-3 bg-light">
       {Object.keys(pages).map((key) => (
-        <Link key={key} to={`/pages/${key}`} style={{ textDecoration: 'none', color: '#333' }}>
-          <button>{pages[key].title}</button>
+        <Link
+          key={key}
+          to={`/pages/${key}`}
+          className="text-decoration-none text-dark"
+        >
+          <button className="btn btn-outline-primary">
+            {pages[key].title}
+          </button>
         </Link>
       ))}
-      <Link to="/pages/admin" style={{ textDecoration: 'none', color: '#333' }}>
-        <button>Admin</button>
+      <Link to="/pages/admin" className="text-decoration-none text-dark">
+        <button className="btn btn-outline-danger">Admin</button>
       </Link>
     </div>
   );

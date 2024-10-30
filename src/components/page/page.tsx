@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface PageProps {
   title: string;
@@ -7,8 +7,8 @@ interface PageProps {
 
 const Page: React.FC<PageProps> = ({ title, content }) => {
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className="container mt-4">
+      <h3>{title}</h3>
       <p>{content}</p>
     </div>
   );
